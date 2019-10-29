@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Forerunner": {
+      "commandName": "Project",
+      "commandLineArgs": "https://127.0.0.1:7443"
+    }
+  }
+}
