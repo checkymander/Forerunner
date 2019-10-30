@@ -6,13 +6,13 @@ Step 1.) Install .NET Core from [here](https://dotnet.microsoft.com/download/dot
 
 Step 2.) Download the most recent version from [releases](https://github.com/checkymander/Forerunner/releases)
 
-Step 3.) Modify the forerunner.lua file as needed and it in the same directory as the forerunner executable
+Step 3.) Modify the forerunner.lua file as needed and it in the same directory as the forerunner dll
 
 ## Usage
 
 For basic execution run the following command 
 
-```forerunner.exe https://localhost:7443```
+```dotnet Forerunner.dll https://localhost:7443```
 
 The console will then ask for your covenant credentials, enter the credentials you want to use to connect to the Covenant server
 
