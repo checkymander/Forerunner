@@ -60,7 +60,7 @@ namespace Covenant.Hub
 
             _connection.Closed += (exception) =>
             {
-                Console.WriteLine("Connection Closed");
+                Console.WriteLine("[!] Connection Closed");
                 return Task.CompletedTask;
             };
             Console.WriteLine("[+] Joining Group");
@@ -87,7 +87,7 @@ namespace Covenant.Hub
             {
                 if(DateTime.Compare(DateTime.UtcNow,timeoutTime) > 0)
                 {
-                    return "Task Failed: No Response";
+                    return "[Forerunner] Task Failed: No Response";
                 }
             }
             return Program.tasks[index].CommandOutput.Output;             
@@ -109,10 +109,6 @@ namespace Covenant.Hub
                 JObject o = JObject.Parse(taskingEvent);
                 JObject o2 = JObject.Parse(command);
 
-                string scriptCode = File.ReadAllText("Forerunner.lua");
-                Script script = Common.GetScript(null);
-                script.DoString(scriptCode);
-
                 // Because this call is not awaited, execution of the current method continues before the call is completed
                 Task.Run(() =>
                 {
@@ -126,6 +122,10 @@ namespace Covenant.Hub
                         catch
                         {
                             Console.WriteLine("[Forerunner] Returned tasks didn't originate from us. Handling via GlobalFunc");
+                            string scriptCode = File.ReadAllText("Forerunner.lua");
+                            Script script = Common.GetScript(comm.Grunt);
+                            script.DoString(scriptCode);
+                            Task.Run(() => { script.Call(script.Globals["OnGlobalOutput"], comm.CommandOutput); });
                         }
                     }
                 });

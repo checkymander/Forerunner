@@ -44,7 +44,7 @@ namespace Covenant.Hub
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine("InnerListener SignalRConnection Exception: " + e.Message + Environment.NewLine + e.StackTrace);
+                Console.Error.WriteLine("[Forerunner] InnerListener SignalRConnection Exception: " + e.Message + Environment.NewLine + e.StackTrace);
                 Environment.Exit(0);
             }
             //Receive Event fires when a new grunt has been activated.
@@ -53,7 +53,7 @@ namespace Covenant.Hub
             });
             _connection.Closed += (exception) =>
             {
-                Console.WriteLine("Connection Closed");
+                Console.WriteLine("[!] Connection Closed");
                 return Task.CompletedTask;
             };
             Console.WriteLine("[+] Joining Group");

@@ -58,7 +58,7 @@ namespace Forerunner
                     CovenantUserLoginResult result = covenantConnection.ApiUsersLoginPost(new CovenantUserLogin { UserName = username, Password = Common.ConvertToUnsecureString(password)});
                     if (result.Success ?? default)
                     {
-                        Console.WriteLine("[+] Access Token Received!\r\n[+] Using Token: {0}", result.CovenantToken);
+                        Console.WriteLine("[+] Access Token Received!");
                         accessToken = result.CovenantToken;
 
                         creds = new TokenCredentials(accessToken);
