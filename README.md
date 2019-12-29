@@ -79,11 +79,24 @@ The following commands are built-in functions supported by Forerunner. More will
 	    - `LaunchJob(gruntName,"ls")`
       
 ## Script Variables
-forerunner.lua supports placeholder for certain specific variables
-1. gruntName
-2. gruntID
-3. gruntGUID
-4. gruntListener
+forerunner.lua supports the following variables to access information about the grunt
+1. gruntName - the name of the grunt
+2. gruntID - the ID oo the grunt
+3. gruntGUID - the GUID of the grunt
+4. gruntHostname - the hostname of the grunt host
+5. gruntIntegrity - the integrity level the grunt is running in (Low/Medium/High)
+6. gruntIP - the IP address of the grunt host
+7. gruntOS - the OS the grunt is running on
+8. gruntProcess - the process the grunt is running as
+9. gruntDomain - the domain the grunt is connected to
+10. gruntUser - the username the grunt returned as
+11. gruntLastCheckIn - last checkin time of the grunt
+
+The following variables are used to gain access to information about the task returned.(Note: these will only be set once, so if you run a new command with GruntExec() these variables will not represent the most recent call)
+1. taskID - the ID of the task
+2. taskName - the name of the task executed by the grunt
+3. taskOutput - the output of the task returned
+
 
 ## Event Hooks
 1. OnGruntInitial
