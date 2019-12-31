@@ -123,9 +123,9 @@ namespace Covenant.Hub
                         {
                             Console.WriteLine("[Forerunner] Returned tasks didn't originate from us. Handling via GlobalFunc");
                             string scriptCode = File.ReadAllText("Forerunner.lua");
-                            Script script = Common.GetScript(comm.Grunt);
+                            Script script = Common.GetScript(comm.Grunt, comm);
                             script.DoString(scriptCode);
-                            Task.Run(() => { script.Call(script.Globals["OnGlobalOutput"], comm.CommandOutput); });
+                            Task.Run(() => { script.Call(script.Globals["OnGlobalOutput"], comm.CommandOutput.Output ?? ""); });
                         }
                     }
                 });

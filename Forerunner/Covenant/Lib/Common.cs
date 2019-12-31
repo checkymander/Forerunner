@@ -154,19 +154,57 @@ namespace Forerunner.Covenant.Lib
                 return "Couldn't Write to Log";
             }
         }
-        public static Script GetScript(Grunt g)
+        public static Script GetScript(Grunt g, GruntCommand comm = null)
         {
             Script script = new Script();
             script.Globals["GruntExec"] = (Func<string, string, string>)GruntHub.GruntExec;
             script.Globals["WriteToLog"] = (Func<string,string>)WriteToLog;
             script.Globals["SendSlackNotification"] = (Func<string, string, string, string>)sendSlackNotification;
-            if (g != null)
+            if (!(g is null))
             {
-                script.Globals["gruntName"] = g.Name;
-                script.Globals["gruntID"] = g.Id;
+                script.Globals["gruntName"] = g.Name ?? "";
+                script.Globals["gruntID"] = g.Id.ToString() ?? "";
                 script.Globals["gruntGUID"] = g.Guid;
-                script.Globals["gruntListener"] = g.Listener;
+                //script.Globals["gruntListener"] = g.Listener.Name ?? "";
+                script.Globals["gruntHostname"] = g.Hostname ?? "";
+                script.Globals["gruntIntegrity"] = g.Integrity.ToString() ?? "";
+                script.Globals["gruntIP"] = g.IpAddress ?? "";
+                script.Globals["gruntOS"] = g.OperatingSystem ?? "";
+                script.Globals["gruntProcess"] = g.Process ?? "";
+                script.Globals["gruntDomain"] = g.UserDomainName ?? "";
+                script.Globals["gruntUser"] = g.UserName ?? "";
+                script.Globals["gruntLastCheckIn"] = g.LastCheckIn.ToString() ?? "";
             }
+            else
+            {
+                script.Globals["gruntName"] = "";
+                script.Globals["gruntID"] =  "";
+                script.Globals["gruntGUID"] = new Guid();
+                script.Globals["gruntListener"] = g.Listener.Name ?? "";
+                script.Globals["gruntHostname"] = "";
+                script.Globals["gruntIntegrity"] = "";
+                script.Globals["gruntIP"] = "";
+                script.Globals["gruntOS"] = "";
+                script.Globals["gruntProcess"] = "";
+                script.Globals["gruntDomain"] = "";
+                script.Globals["gruntUser"] = "";
+                script.Globals["gruntLastCheckIn"] = "";
+            }
+            
+            
+            if(!(comm is null))
+            {
+                script.Globals["taskID"] = comm.Id.Value.ToString() ?? "";
+                script.Globals["taskName"] = comm.GruntTasking.GruntTask.Name ?? "";
+                script.Globals["taskOutput"] = comm.CommandOutput.Output ?? "";
+            }
+            else
+            {
+                script.Globals["taskID"] = "";
+                script.Globals["taskName"] = "";
+                script.Globals["taskOutput"] =  "";
+            }
+
 
             script.Globals["GetGrunts"] = (Func<string>)GruntHub.GetGrunts;
             return script;

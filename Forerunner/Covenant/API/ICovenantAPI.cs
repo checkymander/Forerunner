@@ -548,6 +548,16 @@ namespace Covenant.API
 
         /// <param name='id'>
         /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<Grunt>> ApiGruntsByIdOutboundGetWithHttpMessagesAsync(int id, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <param name='id'>
+        /// </param>
         /// <param name='command'>
         /// </param>
         /// <param name='customHeaders'>

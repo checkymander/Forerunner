@@ -27,16 +27,19 @@ namespace Covenant.API.Models
         /// <param name="language">Possible values include: 'CSharp'</param>
         /// <param name="commType">Possible values include: 'HTTP', 'SMB',
         /// 'Bridge'</param>
-        public ImplantTemplate(int? id = default(int?), string name = default(string), string description = default(string), ImplantLanguage? language = default(ImplantLanguage?), CommunicationType? commType = default(CommunicationType?), string stagerCode = default(string), string executorCode = default(string), IList<Grunt> grunts = default(IList<Grunt>))
+        /// <param name="implantDirection">Possible values include: 'Push',
+        /// 'Pull'</param>
+        public ImplantTemplate(int? id = default(int?), string name = default(string), string description = default(string), ImplantLanguage? language = default(ImplantLanguage?), CommunicationType? commType = default(CommunicationType?), ImplantDirection? implantDirection = default(ImplantDirection?), IList<ListenerType> compatibleListenerTypes = default(IList<ListenerType>), string stagerCode = default(string), string executorCode = default(string))
         {
             Id = id;
             Name = name;
             Description = description;
             Language = language;
             CommType = commType;
+            ImplantDirection = implantDirection;
+            CompatibleListenerTypes = compatibleListenerTypes;
             StagerCode = stagerCode;
             ExecutorCode = executorCode;
-            Grunts = grunts;
             CustomInit();
         }
 
@@ -73,6 +76,17 @@ namespace Covenant.API.Models
         public CommunicationType? CommType { get; set; }
 
         /// <summary>
+        /// Gets or sets possible values include: 'Push', 'Pull'
+        /// </summary>
+        [JsonProperty(PropertyName = "implantDirection")]
+        public ImplantDirection? ImplantDirection { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "compatibleListenerTypes")]
+        public IList<ListenerType> CompatibleListenerTypes { get; private set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "stagerCode")]
         public string StagerCode { get; set; }
@@ -81,11 +95,6 @@ namespace Covenant.API.Models
         /// </summary>
         [JsonProperty(PropertyName = "executorCode")]
         public string ExecutorCode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "grunts")]
-        public IList<Grunt> Grunts { get; set; }
 
     }
 }
