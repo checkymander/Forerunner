@@ -178,7 +178,7 @@ namespace Forerunner.Covenant.Lib
                 script.Globals["gruntName"] = g.Name ?? "";
                 script.Globals["gruntID"] = g.Id.ToString() ?? "";
                 script.Globals["gruntGUID"] = g.Guid;
-                script.Globals["gruntListener"] = g.Listener.Name ?? "";
+                //script.Globals["gruntListener"] = g.Listener.Name ?? "";
                 script.Globals["gruntHostname"] = g.Hostname ?? "";
                 script.Globals["gruntIntegrity"] = g.Integrity.ToString() ?? "";
                 script.Globals["gruntIP"] = g.IpAddress ?? "";
