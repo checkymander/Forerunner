@@ -77,6 +77,16 @@ The following commands are built-in functions supported by Forerunner. More will
 		- Command
     - Example
 	    - `LaunchJob(gruntName,"ls")`
+	    
+5. SendSlackNotification
+	- Sends a mattermost notification to your specified channel.
+	- Params
+		- Mattermost Host
+		- Message
+		- AccessToken
+		- Channel
+	- Example
+      - `SendMattermostNotification("mattermost.company.corp", "This is a test","mattersdfdsmost/tokenwers","general")`
       
 ## Script Variables
 forerunner.lua supports the following variables to access information about the grunt
