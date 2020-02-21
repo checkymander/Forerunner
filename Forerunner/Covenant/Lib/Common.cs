@@ -89,7 +89,7 @@ namespace Forerunner.Covenant.Lib
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
             WebRequest req = WebRequest.Create(uri);
             req.ContentType = "application/json";
-            req.Proxy = new WebProxy("http://127.0.0.1:8080");
+            //req.Proxy = new WebProxy("http://127.0.0.1:8080");
             if (token != "")
             {
                 req.Headers.Add(HttpRequestHeader.Authorization, "Bearer " + token);
@@ -108,7 +108,7 @@ namespace Forerunner.Covenant.Lib
                 WebRequest req = WebRequest.Create(uri);
                 req.Method = "POST";
                 req.ContentType = "application/json";
-                req.Proxy = new WebProxy("http://127.0.0.1:8080");
+                //req.Proxy = new WebProxy("http://127.0.0.1:8080");
                 if (token != "")
                 {
                     req.Headers.Add(HttpRequestHeader.Authorization, "Bearer" + token);
@@ -137,7 +137,18 @@ namespace Forerunner.Covenant.Lib
             client.PostMessage(username: "ForerunnerBot",
                         text: message,
                         channel: channel);
-            return "Sent";
+            var response = String.Format("Sent {0} to {1} in Slack", message, channel);
+            return response;
+        }
+        public static string sendMattermostNotification(string hostname, string message, string accessToken, string channel)
+        {
+            var url = String.Format("https://{0}/hooks/{1}", hostname, accessToken);
+            var client = new MattermostModel(url);
+            client.PostMessage(username: "ForerunnerBot",
+                        text: message,
+                        channel: channel);
+            var response = String.Format("Sent {0} to {1} in Mattermost", message, channel);
+            return response;
         }
         public static string WriteToLog(string message)
         {
@@ -160,12 +171,14 @@ namespace Forerunner.Covenant.Lib
             script.Globals["GruntExec"] = (Func<string, string, string>)GruntHub.GruntExec;
             script.Globals["WriteToLog"] = (Func<string,string>)WriteToLog;
             script.Globals["SendSlackNotification"] = (Func<string, string, string, string>)sendSlackNotification;
+            script.Globals["SendMattermostNotification"] = (Func<string, string, string, string, string>)sendMattermostNotification;
+            Console.WriteLine(g);
             if (!(g is null))
             {
                 script.Globals["gruntName"] = g.Name ?? "";
                 script.Globals["gruntID"] = g.Id.ToString() ?? "";
                 script.Globals["gruntGUID"] = g.Guid;
-                //script.Globals["gruntListener"] = g.Listener.Name ?? "";
+                script.Globals["gruntListener"] = g.Listener.Name ?? "";
                 script.Globals["gruntHostname"] = g.Hostname ?? "";
                 script.Globals["gruntIntegrity"] = g.Integrity.ToString() ?? "";
                 script.Globals["gruntIP"] = g.IpAddress ?? "";
