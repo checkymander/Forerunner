@@ -78,7 +78,7 @@ The following commands are built-in functions supported by Forerunner. More will
     - Example
 	    - `LaunchJob(gruntName,"ls")`
 	    
-5. SendSlackNotification
+5. SendMatterMostNotification
 	- Sends a mattermost notification to your specified channel.
 	- Params
 		- Mattermost Host
