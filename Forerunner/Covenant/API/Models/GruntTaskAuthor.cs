@@ -7,29 +7,30 @@
 namespace Covenant.API.Models
 {
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
-    public partial class ReferenceAssembly
+    public partial class GruntTaskAuthor
     {
         /// <summary>
-        /// Initializes a new instance of the ReferenceAssembly class.
+        /// Initializes a new instance of the GruntTaskAuthor class.
         /// </summary>
-        public ReferenceAssembly()
+        public GruntTaskAuthor()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the ReferenceAssembly class.
+        /// Initializes a new instance of the GruntTaskAuthor class.
         /// </summary>
-        /// <param name="dotNetVersion">Possible values include: 'Net35',
-        /// 'Net40', 'NetCore31'</param>
-        public ReferenceAssembly(int? id = default(int?), string name = default(string), string location = default(string), DotNetVersion? dotNetVersion = default(DotNetVersion?))
+        public GruntTaskAuthor(int? id = default(int?), string name = default(string), string handle = default(string), string link = default(string), IList<GruntTask> gruntTasks = default(IList<GruntTask>))
         {
             Id = id;
             Name = name;
-            Location = location;
-            DotNetVersion = dotNetVersion;
+            Handle = handle;
+            Link = link;
+            GruntTasks = gruntTasks;
             CustomInit();
         }
 
@@ -50,14 +51,18 @@ namespace Covenant.API.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "location")]
-        public string Location { get; set; }
+        [JsonProperty(PropertyName = "handle")]
+        public string Handle { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'Net35', 'Net40', 'NetCore31'
         /// </summary>
-        [JsonProperty(PropertyName = "dotNetVersion")]
-        public DotNetVersion? DotNetVersion { get; set; }
+        [JsonProperty(PropertyName = "link")]
+        public string Link { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "gruntTasks")]
+        public IList<GruntTask> GruntTasks { get; set; }
 
     }
 }

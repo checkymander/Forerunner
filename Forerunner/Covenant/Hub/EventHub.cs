@@ -72,7 +72,7 @@ namespace Covenant.Hub
                 string gruntRegex = "Grunt: [0-9a-fA-F]{10}";
                 RegexOptions options = RegexOptions.Multiline;
                 string gruntName = Regex.Match(o["messageHeader"].ToString(), gruntRegex, options).ToString().Replace("Grunt: ", "");
-                Grunt grunt = Program.covenantConnection.ApiGruntsByNameGet(gruntName);
+                Grunt grunt = Program.covenantConnection.GetGruntByName(gruntName);
                 //Execute Function
                 string scriptCode = File.ReadAllText("Forerunner.lua");
                 Script script = Common.GetScript(grunt);

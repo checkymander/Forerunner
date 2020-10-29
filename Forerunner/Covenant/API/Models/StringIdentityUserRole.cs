@@ -9,20 +9,20 @@ namespace Covenant.API.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class IdentityUserRoleString
+    public partial class StringIdentityUserRole
     {
         /// <summary>
-        /// Initializes a new instance of the IdentityUserRoleString class.
+        /// Initializes a new instance of the StringIdentityUserRole class.
         /// </summary>
-        public IdentityUserRoleString()
+        public StringIdentityUserRole()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the IdentityUserRoleString class.
+        /// Initializes a new instance of the StringIdentityUserRole class.
         /// </summary>
-        public IdentityUserRoleString(string userId = default(string), string roleId = default(string))
+        public StringIdentityUserRole(string userId = default(string), string roleId = default(string))
         {
             UserId = userId;
             RoleId = roleId;

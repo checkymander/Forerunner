@@ -55,7 +55,7 @@ namespace Forerunner
                     SecureString password = Common.GetPassword();
 
                     covenantConnection = new CovenantAPI(new Uri(covenantURL), new BasicAuthenticationCredentials { UserName = "", Password = "" }, clientHandler);
-                    CovenantUserLoginResult result = covenantConnection.ApiUsersLoginPost(new CovenantUserLogin { UserName = username, Password = Common.ConvertToUnsecureString(password)});
+                    CovenantUserLoginResult result = covenantConnection.Login(new CovenantUserLogin { UserName = username, Password = Common.ConvertToUnsecureString(password)});
                     if (result.Success ?? default)
                     {
                         Console.WriteLine("[+] Access Token Received!");
@@ -69,7 +69,7 @@ namespace Forerunner
                             creds,
                             clientHandler
                         );
-                        curUser = covenantConnection.ApiUsersCurrentGet();
+                        curUser = covenantConnection.GetCurrentUser();
                     }
                     else
                     {

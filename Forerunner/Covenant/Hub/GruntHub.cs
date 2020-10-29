@@ -72,13 +72,13 @@ namespace Covenant.Hub
         //Launch a job without waiting for output
         public static async void LaunchJob(string gruntName, string command)
         {
-            Grunt g = Program.covenantConnection.ApiGruntsByNameGet(gruntName);
-            await Program.covenantConnection.ApiGruntsByIdInteractPostAsync((int)g.Id, command);
+            Grunt g = Program.covenantConnection.GetGruntByName(gruntName);
+            await Program.covenantConnection.InteractGruntAsync((int)g.Id, command);
         }
         public static string GruntExec(string gruntName, string command)
         {
-            Grunt g = Program.covenantConnection.ApiGruntsByNameGet(gruntName);
-            GruntCommand res = Program.covenantConnection.ApiGruntsByIdInteractPost((int)g.Id, command);
+            Grunt g = Program.covenantConnection.GetGruntByName(gruntName);
+            GruntCommand res = Program.covenantConnection.InteractGrunt((int)g.Id, command);
             Program.tasks.Add(res);
 
             int index = Program.tasks.FindIndex(c => c.Id == res.Id);
@@ -123,7 +123,7 @@ namespace Covenant.Hub
                         {
                             Console.WriteLine("[Forerunner] Returned tasks didn't originate from us. Handling via GlobalFunc");
                             string scriptCode = File.ReadAllText("Forerunner.lua");
-                            Script script = Common.GetScript(comm.Grunt, comm);
+                            Script script = Common.GetScript(comm.GruntTasking.Grunt, comm);
                             script.DoString(scriptCode);
                             Task.Run(() => { script.Call(script.Globals["OnGlobalOutput"], comm.CommandOutput.Output ?? ""); });
                         }
